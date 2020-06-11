@@ -1,6 +1,7 @@
 # FIN-WAIT-2
 
 Client Side: Socket stuck in FIN-WAIT-2
+
 Server Side: Socket stuck in CLOSE-WAIT
 
 Start the server:
