@@ -18,6 +18,13 @@ func main() {
 	conn, err := net.Dial("tcp", "127.0.0.1:8080")
 	cannot(err)
 
+	if os.Getenv("CLIENT_FIX_SET_LINGER") == "1" {
+		// Discard any unsent data:
+		// https://golang.org/pkg/net/#TCPConn.SetLinger
+		tconn := conn.(*net.TCPConn)
+		tconn.SetLinger(0)
+	}
+
 	fmt.Fprintf(conn, "Hello!\n")
 
 	data, err := bufio.NewReader(conn).ReadString('\n')

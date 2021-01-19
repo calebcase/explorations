@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net"
+	"os"
+	"time"
 )
 
 func cannot(err error) {
@@ -22,7 +24,12 @@ func main() {
 		fmt.Fprintf(conn, "Silly...\n")
 		fmt.Fprintf(conn, "Rabbit")
 
-		// Hold on to this forever...
-		//conn.Close()
+		if os.Getenv("SERVER_FIX_CLOSE_CONN") == "1" {
+			// Wait 10 seconds then close the connection.
+			go func() {
+				time.Sleep(10 * time.Second)
+				conn.Close()
+			}()
+		}
 	}
 }

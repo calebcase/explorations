@@ -1,4 +1,4 @@
-# FIN-WAIT-2
+# FIN-WAIT-1
 
 Client Side: Socket stuck in FIN-WAIT-1
 
